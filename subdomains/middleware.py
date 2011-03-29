@@ -54,10 +54,12 @@ class SubdomainURLRoutingMiddleware(SubdomainMiddleware):
                 # There was no match in the SUBDOMAIN_URLCONFS setting, so let the
                 # ROOT_URLCONF handle the URL routing for this request.
                 pass
-            try:
-                settings.TEMPLATE_DIRS = settings.SUBDOMAIN_TEMPLATE_DIRS[subdomain]
-            except KeyError:
-                pass
+            # Commented out because this causes the python path to be modified, and when there are a lot of requests, 
+            #   this can cause confusion in those requests.
+            #try: 
+            #    settings.TEMPLATE_DIRS = settings.SUBDOMAIN_TEMPLATE_DIRS[subdomain]
+            #except KeyError:
+            #    pass
         
         # Continue processing the request as normal.
         return None
